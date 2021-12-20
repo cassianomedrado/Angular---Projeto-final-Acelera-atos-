@@ -1,0 +1,44 @@
+﻿<div class="container">
+    <h1>Clientes</h1>
+    <a routerLink="add" class="btn btn-sm btn-success mb-2">Novo cliente</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: 25%">ID</th>
+                <th style="width: 25%">Docuemnto</th>
+                <th style="width: 25%">Nome</th>
+                <th style="width: 25%">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: count, currentPage: p }">
+                <td>{{cliente.pessoa_id}}</td>
+                <td>{{cliente.pessoa_documento}}</td>
+                <td>{{cliente.pessoa_nome}}</td>
+                <td>{{retornarTipoCli(cliente.pessoa_tipopessoa)}}</td>
+                <td style="white-space: nowrap">
+                    <!-- <a routerLink="edit/{{user.user_id}}" class="btn btn-sm btn-primary mr-1">Edit</a> -->
+                    <button (click)="deleteUser(user.user_id)" class="btn btn-sm btn-danger btn-delete-user">
+                        <!--[disabled]="user.isDeleting" <span *ngIf="user.isDeleting" 
+                        class="spinner-border spinner-border-sm"></span> -->
+                        <span>Excluir</span>
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="!clientes">
+                <td colspan="4" class="text-center">
+                    <span class="spinner-border spinner-border-lg align-center"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+ <!--incluindo o controle de paginação.-->
+ <div class="text-right">
+    <pagination-controls 
+        (pageChange)="p = $event"
+        previousLabel="Anterior"
+        nextLabel="Próximo"
+        >
+    </pagination-controls>
+  </div>
+</div>

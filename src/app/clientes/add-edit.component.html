@@ -1,0 +1,64 @@
+﻿<h1 *ngIf="isAddMode">Adicionar novo Cliente</h1>
+<h1 *ngIf="!isAddMode">Editar Cliente</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="col-4">
+            <div class="form-group">
+                <label for="pessoa_documento">Documento</label>
+                <input type="text" formControlName="pessoa_documento" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pessoa_documento.errors }" />
+                <div *ngIf="submitted && f.pessoa_documento.errors" class="invalid-feedback">
+                    <div *ngIf="f.pessoa_documento.errors.required">Documento é obrigatório</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label for="pessoa_nome">Nome</label>
+                <input type="text" formControlName="pessoa_nome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pessoa_nome.errors }" />
+                <div *ngIf="submitted && f.pessoa_nome.errors" class="invalid-feedback">
+                    <div *ngIf="f.pessoa_nome.errors.required">Nome é obrigatório</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-4">
+            <div class="form-group">
+                <!-- <label for="user_nome">Tipo CLiente</label> -->
+                <label class="control-label " for="tipocli">Tipo CLiente</label>
+                <ng-select [items]="tipoCliente" 
+                    bindLabel="descricao" 
+                    bindValue="codigo" 
+                    [(ngModel)]="tipoSelecionado"
+                    formControlName="pessoa_tipopessoa">
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group">
+                <label for="pessoa_nome">Telefone</label>
+                <input type="text" formControlName="pessoa_nome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pessoa_nome.errors }" />
+                <div *ngIf="submitted && f.pessoa_nome.errors" class="invalid-feedback">
+                    <div *ngIf="f.pessoa_nome.errors.required">Telefone é obrigatório</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group">
+                <label for="pessoa_nome">Endereços</label>
+                <input type="text" formControlName="pessoa_nome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pessoa_nome.errors }" />
+                <div *ngIf="submitted && f.pessoa_nome.errors" class="invalid-feedback">
+                    <div *ngIf="f.pessoa_nome.errors.required">Endereços é obrigatório</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Save
+        </button>
+        <a routerLink="/users" class="btn btn-link">Cancel</a>
+    </div>
+</form>

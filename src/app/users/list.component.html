@@ -1,0 +1,39 @@
+﻿<div class="container">
+    <h1>Usuários</h1>
+    <a routerLink="add" class="btn btn-sm btn-success mb-2">Novo usuário</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: 30%">ID</th>
+                <th style="width: 30%">Usuário</th>
+                <th style="width: 30%">E-mail</th>
+                <th style="width: 10%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users | paginate: { itemsPerPage: count, currentPage: p }">
+                <td>{{user.user_id}}</td>
+                <td>{{user.user_nome}}</td>
+                <td>{{user.user_email}}</td>
+                <td style="white-space: nowrap">
+                    <!-- <a routerLink="edit/{{user.user_id}}" class="btn btn-sm btn-primary mr-1">Edit</a> -->
+                    <button (click)="deleteUser(user.user_id)" class="btn btn-sm btn-danger btn-delete-user">
+                        <!--[disabled]="user.isDeleting" <span *ngIf="user.isDeleting" 
+                        class="spinner-border spinner-border-sm"></span> -->
+                        <span>Excluir</span>
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="!users">
+                <td colspan="4" class="text-center">
+                    <span class="spinner-border spinner-border-lg align-center"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--incluindo o controle de paginação.-->
+    <div class="text-right">
+        <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Próximo">
+        </pagination-controls>
+    </div>
+</div>

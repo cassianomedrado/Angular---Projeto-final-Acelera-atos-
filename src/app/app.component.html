@@ -1,0 +1,36 @@
+﻿<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
+    
+   
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <i class="fas fa-home S"></i>
+        </a>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Menu
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item"routerLink="/users" routerLinkActive="active">Usuários</a>
+              <a class="dropdown-item" routerLink="/clientes" routerLinkActive="active">Clientes</a>
+              <a class="dropdown-item" routerLink="/#" routerLinkActive="active">Pedidos</a>
+              <a class="dropdown-item" routerLink="/#" routerLinkActive="active">Produtos</a>
+            </div>
+          </div>
+
+        <a class="nav-item nav-link " (click)="logout()">Logout</a>
+    </div>
+</nav>
+
+<!-- main app container -->
+<div class="app-container" [ngClass]="{ 'bg-light': user }">
+    <alert></alert>
+    <router-outlet></router-outlet>
+</div>
+
+<!-- credits -->
+<div class="text-center mt-4">
+    <p>
+        <a href="#" target="_top">Acelera Atos - 2021</a>
+    </p>
+</div>
